@@ -80,12 +80,30 @@ function filesystem:get_crypt()
   return self.current
 end
 
-function filesystem.save_map(text)
+function filesystem.save_state_json()
+  local save_path = "/tmp/arcologies/state.json"
+  -- looks like
+  -- { ["cells"] = { [1] = { [1] = 7,[2] = 6,[3] = hive,} ,} ,["height"] = 8,["arcology_name"] = running,["width"] = 16,} 
+  -- on an arc with 1 cell
+  -- need more info
+
+
+  local data = saveload:collect_data_for_map_save("running")
+  -- cells and attributes
+  local cells = {}
+  -- signals
+  local signals = {}
+
+end
+
+function filesystem.save_map(text, maps_path)
+  maps_path = maps_path or filesystem.paths["maps_path"]
   if text then
     print("saving map...")
-    local save_path = filesystem.paths.maps_path .. text ..".txt"
+    local save_path = maps_path .. text ..".txt"
     local data = saveload:collect_data_for_map_save(text)
     local file = io.open(save_path, "w")
+    print(dump(keeper.cells))
     io.output(file)
     io.write(data.width .. " " .. data.height .. " " .. data.arcology_name .. " " .. "@author_name")
     io.write("\n")

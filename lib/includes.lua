@@ -129,6 +129,8 @@ s = include("arcologies/lib/softcut")
 -- all things musical
 sound = include("arcologies/lib/sound")
 
+json = include("arcologies/lib/json")
+
 -- dev only stuff
 dev = io.open(_path["code"] .. "arcologies/lib/dev.lua", "r")
 if dev ~= nil then

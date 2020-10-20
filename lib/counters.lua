@@ -1,3 +1,5 @@
+include("arcologies/lib/filesystem")
+
 counters = {}
 
 function counters.init()
@@ -36,6 +38,9 @@ function counters.conductor()
       keeper:collide_signals_and_cells()
       keeper:delete_signals()
       keeper:teardown()
+      if math.fmod(counters.music_generation, 4) then
+        filesystem.save_map("running", "/tmp/arcologies/")
+      end
       redraw()
     end
   end
